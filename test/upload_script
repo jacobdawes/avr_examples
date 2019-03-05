@@ -1,0 +1,1 @@
+avrdude -c usbasp -p t85 -P /dev/bus/usb/001/002 -b 19200 -U flash:w:main.hex

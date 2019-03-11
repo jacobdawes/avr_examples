@@ -345,10 +345,10 @@ END GROUP
  *(.debug_frame)
  .debug_frame   0x00000000       0x60 main.o
 
-.debug_str      0x00000000      0x173
+.debug_str      0x00000000      0x184
  *(.debug_str)
- .debug_str     0x00000000      0x173 main.o
-                                0x1a7 (size before relaxing)
+ .debug_str     0x00000000      0x184 main.o
+                                0x1b8 (size before relaxing)
 
 .debug_loc      0x00000000       0x6f
  *(.debug_loc)

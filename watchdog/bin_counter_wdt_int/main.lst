@@ -13,7 +13,7 @@
   14               		.file 1 "main.c"
    1:main.c        **** 
    2:main.c        **** // Watchdog Example
-   3:main.c        **** // 3/4/5
+   3:main.c        **** // 3/6/19
    4:main.c        **** //
    5:main.c        **** // In this example, we implement a simple binary counter
    6:main.c        **** // 
@@ -419,14 +419,14 @@
  180               		.file 3 "/usr/lib/avr/include/stdint.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-     /tmp/ccYcuUrf.s:2      *ABS*:0000003e __SP_H__
-     /tmp/ccYcuUrf.s:3      *ABS*:0000003d __SP_L__
-     /tmp/ccYcuUrf.s:4      *ABS*:0000003f __SREG__
-     /tmp/ccYcuUrf.s:5      *ABS*:00000000 __tmp_reg__
-     /tmp/ccYcuUrf.s:6      *ABS*:00000001 __zero_reg__
-     /tmp/ccYcuUrf.s:12     .text:00000000 __vector_12
-     /tmp/ccYcuUrf.s:46     .text:00000016 read_button
-     /tmp/ccYcuUrf.s:75     .text:0000002a wdt_config_int
-     /tmp/ccYcuUrf.s:102    .text.startup:00000000 main
+     /tmp/ccyjwn7q.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccyjwn7q.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccyjwn7q.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccyjwn7q.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccyjwn7q.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccyjwn7q.s:12     .text:00000000 __vector_12
+     /tmp/ccyjwn7q.s:46     .text:00000016 read_button
+     /tmp/ccyjwn7q.s:75     .text:0000002a wdt_config_int
+     /tmp/ccyjwn7q.s:102    .text.startup:00000000 main
 
 NO UNDEFINED SYMBOLS

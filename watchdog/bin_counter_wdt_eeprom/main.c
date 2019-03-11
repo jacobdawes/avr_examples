@@ -119,7 +119,7 @@ void wdt_config_int(){
 int main(){
 
     // global counter variable
-    count = 0b00001000;
+    count = 0b00000000;
 
     // Initialize PB0-PB3 as output pins
     DDRB = (1<<PB0)|(1<<PB1)|(1<<PB2)|(1<<PB3);

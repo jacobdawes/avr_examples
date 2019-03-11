@@ -382,51 +382,50 @@
  270               	.L__stack_usage = 0
  120:main.c        **** 
  121:main.c        ****     // global counter variable
- 122:main.c        ****     count = 0b00001000;
+ 122:main.c        ****     count = 0b00000000;
  271               		.loc 1 122 0
- 272 0000 88E0      		ldi r24,lo8(8)
- 273 0002 8093 0000 		sts count,r24
+ 272 0000 1092 0000 		sts count,__zero_reg__
  123:main.c        **** 
  124:main.c        ****     // Initialize PB0-PB3 as output pins
  125:main.c        ****     DDRB = (1<<PB0)|(1<<PB1)|(1<<PB2)|(1<<PB3);
- 274               		.loc 1 125 0
- 275 0006 8FE0      		ldi r24,lo8(15)
- 276 0008 87BB      		out 0x17,r24
+ 273               		.loc 1 125 0
+ 274 0004 8FE0      		ldi r24,lo8(15)
+ 275 0006 87BB      		out 0x17,r24
  126:main.c        ****     // Initialize PB4 as an input pin (button)
  127:main.c        ****     DDRB &= ~(1<<PB4);
- 277               		.loc 1 127 0
- 278 000a BC98      		cbi 0x17,4
+ 276               		.loc 1 127 0
+ 277 0008 BC98      		cbi 0x17,4
  128:main.c        ****     PORTB = 0;
- 279               		.loc 1 128 0
- 280 000c 18BA      		out 0x18,__zero_reg__
+ 278               		.loc 1 128 0
+ 279 000a 18BA      		out 0x18,__zero_reg__
  129:main.c        **** 
  130:main.c        ****     // configure watchdog depending on whether or not we have already had a reset
  131:main.c        ****     sei();
- 281               		.loc 1 131 0
- 282               	/* #APP */
- 283               	 ;  131 "main.c" 1
- 284 000e 7894      		sei
- 285               	 ;  0 "" 2
+ 280               		.loc 1 131 0
+ 281               	/* #APP */
+ 282               	 ;  131 "main.c" 1
+ 283 000c 7894      		sei
+ 284               	 ;  0 "" 2
  132:main.c        ****     if(MCUSR&(1<<WDRF)){
- 286               		.loc 1 132 0
- 287               	/* #NOAPP */
- 288 0010 04B6      		in __tmp_reg__,0x34
- 289 0012 03FE      		sbrs __tmp_reg__,3
- 290 0014 00C0      		rjmp .L13
+ 285               		.loc 1 132 0
+ 286               	/* #NOAPP */
+ 287 000e 04B6      		in __tmp_reg__,0x34
+ 288 0010 03FE      		sbrs __tmp_reg__,3
+ 289 0012 00C0      		rjmp .L13
  133:main.c        ****         // if watchdog reset has occurred, get value of count from EEPROM
  134:main.c        ****         count = eeprom_read(0x00);
- 291               		.loc 1 134 0
- 292 0016 80E0      		ldi r24,0
- 293 0018 00D0      		rcall eeprom_read
- 294               	.LVL6:
- 295 001a 8093 0000 		sts count,r24
- 296               	.L13:
+ 290               		.loc 1 134 0
+ 291 0014 80E0      		ldi r24,0
+ 292 0016 00D0      		rcall eeprom_read
+ 293               	.LVL6:
+ 294 0018 8093 0000 		sts count,r24
+ 295               	.L13:
  135:main.c        ****     }
  136:main.c        ****     wdt_config_int();
- 297               		.loc 1 136 0
- 298 001e 00D0      		rcall wdt_config_int
- 299               	.LVL7:
- 300               	.L15:
+ 296               		.loc 1 136 0
+ 297 001c 00D0      		rcall wdt_config_int
+ 298               	.LVL7:
+ 299               	.L15:
  137:main.c        **** 
  138:main.c        **** 
  139:main.c        ****     while(1){
@@ -434,24 +433,24 @@
  141:main.c        ****     
  142:main.c        ****         // wait for a button press, 50 ms delay to act as simple debounce
  143:main.c        ****         while(read_button(PB4));
- 301               		.loc 1 143 0 discriminator 1
- 302 0020 84E0      		ldi r24,lo8(4)
- 303 0022 00D0      		rcall read_button
- 304               	.LVL8:
- 305 0024 8111      		cpse r24,__zero_reg__
- 306 0026 00C0      		rjmp .L15
+ 300               		.loc 1 143 0 discriminator 1
+ 301 001e 84E0      		ldi r24,lo8(4)
+ 302 0020 00D0      		rcall read_button
+ 303               	.LVL8:
+ 304 0022 8111      		cpse r24,__zero_reg__
+ 305 0024 00C0      		rjmp .L15
  144:main.c        ****         // reset the watchdog timer
  145:main.c        ****         wdt_reset();
- 307               		.loc 1 145 0
- 308               	/* #APP */
- 309               	 ;  145 "main.c" 1
- 310 0028 A895      		wdr
- 311               	 ;  0 "" 2
- 312               	.LVL9:
- 313               	/* #NOAPP */
- 314               	.LBB4:
- 315               	.LBB5:
- 316               		.file 2 "/usr/lib/avr/include/util/delay.h"
+ 306               		.loc 1 145 0
+ 307               	/* #APP */
+ 308               	 ;  145 "main.c" 1
+ 309 0026 A895      		wdr
+ 310               	 ;  0 "" 2
+ 311               	.LVL9:
+ 312               	/* #NOAPP */
+ 313               	.LBB4:
+ 314               	.LBB5:
+ 315               		.file 2 "/usr/lib/avr/include/util/delay.h"
    1:/usr/lib/avr/include/util/delay.h **** /* Copyright (c) 2002, Marek Michalkiewicz
    2:/usr/lib/avr/include/util/delay.h ****    Copyright (c) 2004,2005,2007 Joerg Wunsch
    3:/usr/lib/avr/include/util/delay.h ****    Copyright (c) 2007  Florin-Viorel Petrov
@@ -616,67 +615,67 @@
  162:/usr/lib/avr/include/util/delay.h **** 	#endif
  163:/usr/lib/avr/include/util/delay.h **** 
  164:/usr/lib/avr/include/util/delay.h **** 	__builtin_avr_delay_cycles(__ticks_dc);
- 317               		.loc 2 164 0
- 318 002a 2FE7      		ldi r18,lo8(79999)
- 319 002c 88E3      		ldi r24,hi8(79999)
- 320 002e 91E0      		ldi r25,hlo8(79999)
- 321 0030 2150      		1: subi r18,1
- 322 0032 8040      		sbci r24,0
- 323 0034 9040      		sbci r25,0
- 324 0036 01F4      		brne 1b
- 325 0038 00C0      		rjmp .
- 326 003a 0000      		nop
- 327               	.LBE5:
- 328               	.LBE4:
+ 316               		.loc 2 164 0
+ 317 0028 2FE7      		ldi r18,lo8(79999)
+ 318 002a 88E3      		ldi r24,hi8(79999)
+ 319 002c 91E0      		ldi r25,hlo8(79999)
+ 320 002e 2150      		1: subi r18,1
+ 321 0030 8040      		sbci r24,0
+ 322 0032 9040      		sbci r25,0
+ 323 0034 01F4      		brne 1b
+ 324 0036 00C0      		rjmp .
+ 325 0038 0000      		nop
+ 326               	.LBE5:
+ 327               	.LBE4:
  146:main.c        ****         _delay_ms(50);
  147:main.c        ****         // once the button press occurs, increment counter
  148:main.c        ****         if(count<16)
- 329               		.loc 1 148 0
- 330 003c 8091 0000 		lds r24,count
- 331 0040 8031      		cpi r24,lo8(16)
- 332 0042 00F4      		brsh .L16
+ 328               		.loc 1 148 0
+ 329 003a 8091 0000 		lds r24,count
+ 330 003e 8031      		cpi r24,lo8(16)
+ 331 0040 00F4      		brsh .L16
  149:main.c        ****             count++;
- 333               		.loc 1 149 0
- 334 0044 8091 0000 		lds r24,count
- 335 0048 8F5F      		subi r24,lo8(-(1))
- 336 004a 8093 0000 		sts count,r24
- 337 004e 00C0      		rjmp .L17
- 338               	.L16:
+ 332               		.loc 1 149 0
+ 333 0042 8091 0000 		lds r24,count
+ 334 0046 8F5F      		subi r24,lo8(-(1))
+ 335 0048 8093 0000 		sts count,r24
+ 336 004c 00C0      		rjmp .L17
+ 337               	.L16:
  150:main.c        ****         else
  151:main.c        ****             count = 0;
- 339               		.loc 1 151 0
- 340 0050 1092 0000 		sts count,__zero_reg__
- 341               	.L17:
+ 338               		.loc 1 151 0
+ 339 004e 1092 0000 		sts count,__zero_reg__
+ 340               	.L17:
  152:main.c        **** 
  153:main.c        ****         // display count on output register
  154:main.c        ****         PORTB = count;
- 342               		.loc 1 154 0
- 343 0054 8091 0000 		lds r24,count
- 344 0058 88BB      		out 0x18,r24
+ 341               		.loc 1 154 0
+ 342 0052 8091 0000 		lds r24,count
+ 343 0056 88BB      		out 0x18,r24
  155:main.c        ****     }
- 345               		.loc 1 155 0
- 346 005a 00C0      		rjmp .L15
- 347               		.cfi_endproc
- 348               	.LFE12:
- 350               		.comm	count,1,1
- 351               		.text
- 352               	.Letext0:
- 353               		.file 3 "/usr/lib/avr/include/stdint.h"
+ 344               		.loc 1 155 0
+ 345 0058 00C0      		rjmp .L15
+ 346               		.cfi_endproc
+ 347               	.LFE12:
+ 349               		.comm	count,1,1
+ 350               		.text
+ 351               	.Letext0:
+ 352               		.file 3 "/usr/lib/avr/include/stdint.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-     /tmp/ccAxuLKC.s:2      *ABS*:0000003e __SP_H__
-     /tmp/ccAxuLKC.s:3      *ABS*:0000003d __SP_L__
-     /tmp/ccAxuLKC.s:4      *ABS*:0000003f __SREG__
-     /tmp/ccAxuLKC.s:5      *ABS*:00000000 __tmp_reg__
-     /tmp/ccAxuLKC.s:6      *ABS*:00000001 __zero_reg__
-     /tmp/ccAxuLKC.s:12     .text:00000000 eeprom_write
-     /tmp/ccAxuLKC.s:44     .text:00000014 __vector_12
+     /tmp/ccy2Wt6B.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccy2Wt6B.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccy2Wt6B.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccy2Wt6B.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccy2Wt6B.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccy2Wt6B.s:12     .text:00000000 eeprom_write
+     /tmp/ccy2Wt6B.s:44     .text:00000014 __vector_12
                             *COM*:00000001 count
-     /tmp/ccAxuLKC.s:152    .text:00000072 eeprom_read
-     /tmp/ccAxuLKC.s:181    .text:00000082 read_button
-     /tmp/ccAxuLKC.s:210    .text:00000096 wdt_config_res
-     /tmp/ccAxuLKC.s:236    .text:000000aa wdt_config_int
-     /tmp/ccAxuLKC.s:263    .text.startup:00000000 main
+     /tmp/ccy2Wt6B.s:152    .text:00000072 eeprom_read
+     /tmp/ccy2Wt6B.s:181    .text:00000082 read_button
+     /tmp/ccy2Wt6B.s:210    .text:00000096 wdt_config_res
+     /tmp/ccy2Wt6B.s:236    .text:000000aa wdt_config_int
+     /tmp/ccy2Wt6B.s:263    .text.startup:00000000 main
 
 UNDEFINED SYMBOLS
 __do_clear_bss

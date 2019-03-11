@@ -13,34 +13,27 @@
   14               		.file 1 "main.c"
    1:main.c        **** 
    2:main.c        **** // Watchdog Example
-   3:main.c        **** // 3/4/5
+   3:main.c        **** // 3/6/19
    4:main.c        **** //
    5:main.c        **** // In this example, we implement a simple binary counter
-   6:main.c        **** // 
-   7:main.c        **** // If the counter is not incremented after a certain period of time,
-   8:main.c        **** // the watchdog will first trigger an interrupt, flashing the lights on the port
-   9:main.c        **** // 
-  10:main.c        **** // The watchdog timer is configured while the flashing occurs
-  11:main.c        **** // When this timer is done, the device will reset
-  12:main.c        **** 
-  13:main.c        **** 
-  14:main.c        **** #include <avr/io.h>
-  15:main.c        **** #include <util/delay.h>
-  16:main.c        **** 
-  17:main.c        **** 
-  18:main.c        **** 
-  19:main.c        **** // Read pin value and output true/false result
-  20:main.c        **** uint8_t read_button(uint8_t pin){
-  15               		.loc 1 20 0
+   6:main.c        **** 
+   7:main.c        **** #include <avr/io.h>
+   8:main.c        **** #include <util/delay.h>
+   9:main.c        **** 
+  10:main.c        **** 
+  11:main.c        **** 
+  12:main.c        **** // Read pin value and output true/false result
+  13:main.c        **** uint8_t read_button(uint8_t pin){
+  15               		.loc 1 13 0
   16               		.cfi_startproc
   17               	.LVL0:
   18               	/* prologue: function */
   19               	/* frame size = 0 */
   20               	/* stack size = 0 */
   21               	.L__stack_usage = 0
-  21:main.c        **** 
-  22:main.c        ****     if(PINB&(1<<pin))
-  22               		.loc 1 22 0
+  14:main.c        **** 
+  15:main.c        ****     if(PINB&(1<<pin))
+  22               		.loc 1 15 0
   23 0000 26B3      		in r18,0x16
   24 0002 30E0      		ldi r19,0
   25 0004 00C0      		rjmp 2f
@@ -50,11 +43,11 @@
   29               		2:
   30 000a 8A95      		dec r24
   31 000c 02F4      		brpl 1b
-  23:main.c        ****         return 1;
-  24:main.c        ****     else
-  25:main.c        ****         return 0;
-  26:main.c        **** }
-  32               		.loc 1 26 0
+  16:main.c        ****         return 1;
+  17:main.c        ****     else
+  18:main.c        ****         return 0;
+  19:main.c        **** }
+  32               		.loc 1 19 0
   33 000e 822F      		mov r24,r18
   34               	.LVL1:
   35 0010 8170      		andi r24,lo8(1)
@@ -65,45 +58,45 @@
   41               	.global	main
   43               	main:
   44               	.LFB7:
-  27:main.c        **** 
-  28:main.c        **** 
-  29:main.c        **** int main(){
-  45               		.loc 1 29 0
+  20:main.c        **** 
+  21:main.c        **** 
+  22:main.c        **** int main(){
+  45               		.loc 1 22 0
   46               		.cfi_startproc
   47               	/* prologue: function */
   48               	/* frame size = 0 */
   49               	/* stack size = 0 */
   50               	.L__stack_usage = 0
   51               	.LVL2:
-  30:main.c        **** 
-  31:main.c        ****     // Local counter variable
-  32:main.c        ****     uint8_t count = 0;
-  33:main.c        **** 
-  34:main.c        ****     // Initialize PB0-PB3 as output pins
-  35:main.c        ****     DDRB = (1<<PB0)|(1<<PB1)|(1<<PB2)|(1<<PB3);
-  52               		.loc 1 35 0
+  23:main.c        **** 
+  24:main.c        ****     // Local counter variable
+  25:main.c        ****     uint8_t count = 0;
+  26:main.c        **** 
+  27:main.c        ****     // Initialize PB0-PB3 as output pins
+  28:main.c        ****     DDRB = (1<<PB0)|(1<<PB1)|(1<<PB2)|(1<<PB3);
+  52               		.loc 1 28 0
   53 0000 8FE0      		ldi r24,lo8(15)
   54 0002 87BB      		out 0x17,r24
-  36:main.c        ****     // Initialize PB4 as an input pin (button)
-  37:main.c        ****     DDRB &= ~(1<<PB4);
-  55               		.loc 1 37 0
+  29:main.c        ****     // Initialize PB4 as an input pin (button)
+  30:main.c        ****     DDRB &= ~(1<<PB4);
+  55               		.loc 1 30 0
   56 0004 BC98      		cbi 0x17,4
-  38:main.c        ****     PORTB = 0;
-  57               		.loc 1 38 0
+  31:main.c        ****     PORTB = 0;
+  57               		.loc 1 31 0
   58 0006 18BA      		out 0x18,__zero_reg__
-  32:main.c        ****     uint8_t count = 0;
-  59               		.loc 1 32 0
+  25:main.c        ****     uint8_t count = 0;
+  59               		.loc 1 25 0
   60 0008 C0E0      		ldi r28,0
   61               	.LVL3:
   62               	.L4:
-  39:main.c        **** 
-  40:main.c        **** 
-  41:main.c        ****     while(1){
-  42:main.c        ****     
-  43:main.c        ****     
-  44:main.c        ****         // wait for a button press
-  45:main.c        ****         while(read_button(PB4));
-  63               		.loc 1 45 0 discriminator 1
+  32:main.c        **** 
+  33:main.c        **** 
+  34:main.c        ****     while(1){
+  35:main.c        ****     
+  36:main.c        ****     
+  37:main.c        ****         // wait for a button press, 50 ms delay to act as a simple debounce
+  38:main.c        ****         while(read_button(PB4));
+  63               		.loc 1 38 0 discriminator 1
   64 000a 84E0      		ldi r24,lo8(4)
   65 000c 00D0      		rcall read_button
   66               	.LVL4:
@@ -289,31 +282,31 @@
   82 0022 0000      		nop
   83               	.LBE5:
   84               	.LBE4:
-  46:main.c        ****         _delay_ms(50);
-  47:main.c        ****         // once the button press occurs, increment counter
-  48:main.c        ****         if(count<16)
-  85               		.loc 1 48 0
+  39:main.c        ****         _delay_ms(50);
+  40:main.c        ****         // once the button press occurs, increment counter
+  41:main.c        ****         if(count<16)
+  85               		.loc 1 41 0
   86 0024 C031      		cpi r28,lo8(16)
   87 0026 00F4      		brsh .L7
-  49:main.c        ****             count++;
-  88               		.loc 1 49 0
+  42:main.c        ****             count++;
+  88               		.loc 1 42 0
   89 0028 CF5F      		subi r28,lo8(-(1))
   90               	.LVL6:
   91 002a 00C0      		rjmp .L5
   92               	.L7:
-  50:main.c        ****         else
-  51:main.c        ****             count = 0;
-  93               		.loc 1 51 0
+  43:main.c        ****         else
+  44:main.c        ****             count = 0;
+  93               		.loc 1 44 0
   94 002c C0E0      		ldi r28,0
   95               	.LVL7:
   96               	.L5:
-  52:main.c        **** 
-  53:main.c        ****         // display count on output register
-  54:main.c        ****         PORTB = count;
-  97               		.loc 1 54 0
+  45:main.c        **** 
+  46:main.c        ****         // display count on output register
+  47:main.c        ****         PORTB = count;
+  97               		.loc 1 47 0
   98 002e C8BB      		out 0x18,r28
-  55:main.c        ****     }
-  99               		.loc 1 55 0
+  48:main.c        ****     }
+  99               		.loc 1 48 0
  100 0030 00C0      		rjmp .L4
  101               		.cfi_endproc
  102               	.LFE7:
@@ -322,12 +315,12 @@
  106               		.file 3 "/usr/lib/avr/include/stdint.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-     /tmp/ccoU7zGe.s:2      *ABS*:0000003e __SP_H__
-     /tmp/ccoU7zGe.s:3      *ABS*:0000003d __SP_L__
-     /tmp/ccoU7zGe.s:4      *ABS*:0000003f __SREG__
-     /tmp/ccoU7zGe.s:5      *ABS*:00000000 __tmp_reg__
-     /tmp/ccoU7zGe.s:6      *ABS*:00000001 __zero_reg__
-     /tmp/ccoU7zGe.s:12     .text:00000000 read_button
-     /tmp/ccoU7zGe.s:43     .text.startup:00000000 main
+     /tmp/ccKv68Iz.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccKv68Iz.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccKv68Iz.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccKv68Iz.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccKv68Iz.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccKv68Iz.s:12     .text:00000000 read_button
+     /tmp/ccKv68Iz.s:43     .text.startup:00000000 main
 
 NO UNDEFINED SYMBOLS

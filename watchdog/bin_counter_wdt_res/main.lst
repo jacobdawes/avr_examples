@@ -383,13 +383,13 @@
  147               		.file 3 "/usr/lib/avr/include/stdint.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-     /tmp/ccGE9mhQ.s:2      *ABS*:0000003e __SP_H__
-     /tmp/ccGE9mhQ.s:3      *ABS*:0000003d __SP_L__
-     /tmp/ccGE9mhQ.s:4      *ABS*:0000003f __SREG__
-     /tmp/ccGE9mhQ.s:5      *ABS*:00000000 __tmp_reg__
-     /tmp/ccGE9mhQ.s:6      *ABS*:00000001 __zero_reg__
-     /tmp/ccGE9mhQ.s:12     .text:00000000 read_button
-     /tmp/ccGE9mhQ.s:42     .text:00000014 wdt_config_res
-     /tmp/ccGE9mhQ.s:69     .text.startup:00000000 main
+     /tmp/cc2cNaVZ.s:2      *ABS*:0000003e __SP_H__
+     /tmp/cc2cNaVZ.s:3      *ABS*:0000003d __SP_L__
+     /tmp/cc2cNaVZ.s:4      *ABS*:0000003f __SREG__
+     /tmp/cc2cNaVZ.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/cc2cNaVZ.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/cc2cNaVZ.s:12     .text:00000000 read_button
+     /tmp/cc2cNaVZ.s:42     .text:00000014 wdt_config_res
+     /tmp/cc2cNaVZ.s:69     .text.startup:00000000 main
 
 NO UNDEFINED SYMBOLS
